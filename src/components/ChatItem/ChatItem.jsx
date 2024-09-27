@@ -9,7 +9,10 @@ const ChatItem = () => {
         alt="Zdjęcie profilu"
         className={styles.profileImage}
       />
-      <span className={styles.name}>Adam Kot</span>
+      <div className={styles.wrapper}>
+        <p className={styles.name}>Adam Kot</p>
+        <p className={styles.message}>To jest wiadomość od użytkownika</p>
+      </div>
     </div>
   );
 };

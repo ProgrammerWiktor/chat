@@ -1,7 +1,7 @@
 .container {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.7rem;
   border-bottom: 1px solid #4e4e4e;
   padding: 1rem;
   transition: 0.3s;
@@ -16,4 +16,13 @@
 .profileImage {
   width: 3rem;
   border-radius: 50%;
+}
+
+.name {
+  margin-bottom: 0.5rem;
+}
+
+.message {
+  font-size: 0.8rem;
+  color: gray;
 }
