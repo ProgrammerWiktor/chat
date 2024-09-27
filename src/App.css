@@ -13,8 +13,8 @@
 .app {
   width: 80rem;
   height: 40rem;
-  margin: 0.5rem;
-  background-color: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(8px);
+  margin: 0.7rem;
+  background-color: #222222;
   border-radius: 5px;
+  display: flex;
 }
