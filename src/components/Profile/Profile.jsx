@@ -10,7 +10,7 @@ const Profile = () => {
           alt="Zdjęcie profilowe"
           className={styles.profileImage}
         />
-        <span className={styles.name}>Jan Kowalski</span>
+        <p className={styles.name}>Jan Kowalski</p>
       </div>
       <button className={styles.logout}>
         <img
