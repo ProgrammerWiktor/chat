@@ -1,4 +1,6 @@
 .container {
   flex: 1.1;
   border-right: 1px solid gray;
+  display: flex;
+  flex-direction: column;
 }

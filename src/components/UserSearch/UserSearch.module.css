@@ -1,0 +1,21 @@
+.container {
+  background-color: black;
+  margin: 1rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.searchImage {
+  width: 1.3rem;
+}
+
+.userInput {
+  width: 100%;
+  background-color: transparent;
+  outline: none;
+  border: 0;
+  color: white;
+}
