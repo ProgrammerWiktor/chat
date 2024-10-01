@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./ChatItem.module.css";
+import { ChatContext } from "../../ChatContext";
 
 const ChatItem = () => {
+  const { setChatPartner } = useContext(ChatContext);
+
+  const handleClick = () => {
+    setChatPartner("Adam Kot");
+  };
+
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={handleClick}>
       <img
         src="/images/blank-profile.png"
         alt="Zdjęcie profilu"

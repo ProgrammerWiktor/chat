@@ -16,3 +16,22 @@
   width: 2rem;
   border-radius: 50%;
 }
+
+.backArrowButton {
+  width: 2rem;
+  background-color: transparent;
+  border: 0;
+  transition: 0.3s;
+  border-radius: 5px;
+  padding: 0.2rem;
+}
+
+.backArrowButton:hover {
+  cursor: pointer;
+  background-color: #222222;
+  transition: 0.3s;
+}
+
+.backArrowImage {
+  width: 100%;
+}
