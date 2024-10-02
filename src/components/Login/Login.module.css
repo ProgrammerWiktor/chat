@@ -66,6 +66,12 @@
   color: red;
 }
 
+.resetPassword {
+  text-align: left;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
 @media (max-width: 500px) {
   .container {
     width: 90%;

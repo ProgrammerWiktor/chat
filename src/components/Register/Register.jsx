@@ -11,12 +11,13 @@ import {
 } from "firebase/firestore";
 import { auth, db } from "../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSetUsername = (e) => {
@@ -33,10 +34,9 @@ const Register = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    setError("");
 
     if (password.trim().length < 8) {
-      setError("Hasło nie może być krótsze niż 8 znaków");
+      toast.info("Hasło nie może być krótsze niż 8 znaków");
       return;
     }
 
@@ -46,7 +46,7 @@ const Register = () => {
       );
 
       if (!usernameQuery.empty) {
-        setError("Nazwa użytkownika jest już zajęta");
+        toast.error("Nazwa użytkownika jest już zajęta");
         return;
       }
 
@@ -68,62 +68,67 @@ const Register = () => {
       setPassword("");
 
       navigate("/chat");
+      setTimeout(() => {
+        toast.success("Poprawnie zarejestowano");
+      }, 500);
     } catch {
-      setError("Rejestracja nie powiodła się");
+      toast.error("Rejestracja nie powiodła się");
     }
   };
 
   return (
-    <form className={styles.container} onSubmit={handleRegister}>
-      <p className={styles.title}>Rejestracja</p>
-      <div className={styles.item}>
-        <label htmlFor="username" className={styles.label}>
-          Nazwa użytkownika:
-        </label>
-        <input
-          type="text"
-          id="username"
-          className={styles.input}
-          autoComplete="off"
-          value={username}
-          onChange={handleSetUsername}
-        />
-      </div>
-      <div className={styles.item}>
-        <label htmlFor="email" className={styles.label}>
-          Email:
-        </label>
-        <input
-          type="email"
-          id="email"
-          className={styles.input}
-          autoComplete="off"
-          value={email}
-          onChange={handleSetEmail}
-        />
-      </div>
-      <div className={styles.item}>
-        <label htmlFor="password" className={styles.label}>
-          Hasło:
-        </label>
-        <input
-          type="password"
-          id="password"
-          className={styles.input}
-          autoComplete="off"
-          value={password}
-          onChange={handleSetPassword}
-        />
-      </div>
-      {error && <p className={styles.error}>{error}</p>}
-      <button className={styles.button}>Zarejestruj się</button>
-      <div className={styles.item}>
-        <p className={styles.question}>Masz już konto?</p>
-        <Link to="/login" className={styles.link}>
-          Zaloguj się
-        </Link>
-      </div>
-    </form>
+    <>
+      <form className={styles.container} onSubmit={handleRegister}>
+        <p className={styles.title}>Rejestracja</p>
+        <div className={styles.item}>
+          <label htmlFor="username" className={styles.label}>
+            Nazwa użytkownika:
+          </label>
+          <input
+            type="text"
+            id="username"
+            className={styles.input}
+            autoComplete="off"
+            value={username}
+            onChange={handleSetUsername}
+          />
+        </div>
+        <div className={styles.item}>
+          <label htmlFor="email" className={styles.label}>
+            Email:
+          </label>
+          <input
+            type="email"
+            id="email"
+            className={styles.input}
+            autoComplete="off"
+            value={email}
+            onChange={handleSetEmail}
+          />
+        </div>
+        <div className={styles.item}>
+          <label htmlFor="password" className={styles.label}>
+            Hasło:
+          </label>
+          <input
+            type="password"
+            id="password"
+            className={styles.input}
+            autoComplete="off"
+            value={password}
+            onChange={handleSetPassword}
+          />
+        </div>
+        <button className={styles.button}>Zarejestruj się</button>
+        <div className={styles.item}>
+          <p className={styles.question}>Masz już konto?</p>
+          <Link to="/login" className={styles.link}>
+            Zaloguj się
+          </Link>
+        </div>
+      </form>
+      <ToastContainer />
+    </>
   );
 };
 
