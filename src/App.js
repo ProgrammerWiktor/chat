@@ -12,10 +12,9 @@ import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
-  const isAuthenticated = true;
-
   return (
     <ChatProvider>
       <Router>
@@ -26,15 +25,13 @@ function App() {
             <Route
               path="/chat"
               element={
-                isAuthenticated ? (
+                <ProtectedRoute>
                   <div className="app">
                     <List />
                     <Main />
                     <ToastContainer />
                   </div>
-                ) : (
-                  <Navigate to={"/login"} />
-                )
+                </ProtectedRoute>
               }
             />
             <Route path="*" element={<Navigate to={"/login"} />} />
