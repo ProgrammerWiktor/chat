@@ -6,6 +6,7 @@ const MessageInput = () => {
     <div className={styles.container}>
       <input
         type="text"
+        id="message"
         placeholder="Napisz wiadomość"
         className={styles.message}
       />

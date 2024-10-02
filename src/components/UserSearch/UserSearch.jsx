@@ -11,6 +11,7 @@ const UserSearch = () => {
       />
       <input
         type="text"
+        id="user"
         className={styles.userInput}
         placeholder="Szukaj użytkownika"
       />
