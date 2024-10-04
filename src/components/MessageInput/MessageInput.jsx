@@ -10,6 +10,19 @@ const MessageInput = () => {
         placeholder="Napisz wiadomość"
         className={styles.message}
       />
+      <input
+        type="file"
+        accept="image/*"
+        id="picture-upload"
+        style={{ display: "none" }}
+      />
+      <label htmlFor="picture-upload" className={styles.sendImageButton}>
+        <img
+          src="/images/image.svg"
+          alt="Wyślij zdjęcie"
+          className={styles.sendImageIcon}
+        />
+      </label>
       <button className={styles.send}>Wyślij</button>
     </div>
   );

@@ -21,6 +21,13 @@ const Chat = () => {
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
         bibendum quam nec sapien malesuada condimentum.
       </div>
+      <div className={styles.message}>
+        <img
+          src="/images/landscape.jpg"
+          alt="Obraz"
+          className={styles.picture}
+        />
+      </div>
       <div className={styles.yourMessage}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
         bibendum quam nec sapien malesuada condimentum. In sed lectus nisi.
@@ -34,6 +41,13 @@ const Chat = () => {
       </div>
       <div className={styles.yourMessage}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </div>
+      <div className={styles.yourMessage}>
+        <img
+          src="/images/landscape.jpg"
+          alt="Obraz"
+          className={styles.picture}
+        />
       </div>
       <div className={styles.message}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam

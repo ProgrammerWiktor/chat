@@ -32,3 +32,20 @@
   background-color: #0167ff;
   transition: 0.3s;
 }
+
+.sendImageButton {
+  width: 1.8rem;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sendImageButton:hover {
+  cursor: pointer;
+}
+
+.sendImageIcon {
+  width: 100%;
+}
