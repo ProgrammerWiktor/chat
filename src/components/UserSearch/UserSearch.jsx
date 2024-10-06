@@ -22,7 +22,6 @@ const UserSearch = () => {
 
       querySnapshot.forEach((doc) => {
         setUser(doc.data());
-        console.log(doc.data());
       });
     } catch {
       toast.error("Nie udało się wyszukać użytkownika");

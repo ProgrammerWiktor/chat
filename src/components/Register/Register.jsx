@@ -14,6 +14,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import imageCompression from "browser-image-compression";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -35,13 +36,23 @@ const Register = () => {
     setPassword(e.target.value);
   };
 
-  const handleSetPhoto = (e) => {
+  const handleSetPhoto = async (e) => {
     const selectedPhoto = e.target.files[0];
-    setPhoto(selectedPhoto);
 
-    if (selectedPhoto) {
-      const previewURL = URL.createObjectURL(selectedPhoto);
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 800,
+      useWebWorker: true,
+    };
+
+    try {
+      const compressedFile = await imageCompression(selectedPhoto, options);
+      setPhoto(compressedFile);
+
+      const previewURL = URL.createObjectURL(compressedFile);
       setPhotoPreview(previewURL);
+    } catch {
+      toast.error("Nie udało się skompresować zdjęcia");
     }
   };
 
@@ -99,7 +110,7 @@ const Register = () => {
       setTimeout(() => {
         toast.success("Poprawnie zarejestrowano");
       }, 500);
-    } catch (error) {
+    } catch {
       toast.error("Rejestracja nie powiodła się");
     }
   };
@@ -109,21 +120,11 @@ const Register = () => {
       <form className={styles.container} onSubmit={handleRegister}>
         <p className={styles.title}>Rejestracja</p>
         <div className={styles.item}>
-          {photoPreview && (
-            <img
-              src={photoPreview}
-              alt="Zdjęcie profilowe"
-              className={styles.profilePicture}
-            />
-          )}
-          {!photoPreview && (
-            <img
-              src="/images/blank-profile.png"
-              alt="Zdjęcie profilowe"
-              className={styles.profilePicture}
-            />
-          )}
-          <div />
+          <img
+            src={photoPreview ? photoPreview : "images/blank-profile.png"}
+            alt="Zdjęcie profilowe"
+            className={styles.profilePicture}
+          />
         </div>
         <div className={styles.item}>
           <label htmlFor="username" className={styles.label}>
