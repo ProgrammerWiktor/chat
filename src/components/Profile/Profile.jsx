@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import styles from "./Profile.module.css";
 import { useNavigate } from "react-router-dom";
-import { auth, db } from "../../firebase";
+import { auth } from "../../firebase";
 import { signOut } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
+import { ChatContext } from "../../ChatContext";
 
 const Profile = () => {
+  const { currentUser } = useContext(ChatContext);
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
 
   const handleLogout = async () => {
     try {
@@ -18,39 +18,19 @@ const Profile = () => {
     }
   };
 
-  useEffect(() => {
-    const fetchUsername = async () => {
-      try {
-        const user = auth.currentUser;
-
-        if (user) {
-          const uid = user.uid;
-
-          const userDocRef = doc(db, "users", uid);
-
-          const userDoc = await getDoc(userDocRef);
-
-          if (userDoc.exists()) {
-            setUsername(userDoc.data().username);
-          }
-        }
-      } catch {
-        alert("Nie udało się pobrać nazwy użytkownika");
-      }
-    };
-
-    fetchUsername();
-  }, []);
-
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
         <img
-          src="/images/blank-profile.png"
+          src={
+            currentUser.photoURL
+              ? currentUser.photoURL
+              : "/images/blank-profile.png"
+          }
           alt="Zdjęcie profilowe"
           className={styles.profileImage}
         />
-        <p className={styles.name}>{username}</p>
+        <p className={styles.name}>{currentUser.username}</p>
       </div>
       <button className={styles.logout} onClick={handleLogout}>
         <img
