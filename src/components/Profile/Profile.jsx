@@ -23,14 +23,14 @@ const Profile = () => {
       <div className={styles.wrapper}>
         <img
           src={
-            currentUser.photoURL
+            currentUser?.photoURL
               ? currentUser.photoURL
               : "/images/blank-profile.png"
           }
           alt="Zdjęcie profilowe"
           className={styles.profileImage}
         />
-        <p className={styles.name}>{currentUser.username}</p>
+        <p className={styles.name}>{currentUser?.username}</p>
       </div>
       <button className={styles.logout} onClick={handleLogout}>
         <img

@@ -8,6 +8,7 @@ export const ChatProvider = ({ children }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [chatPartner, setChatPartner] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const handleResize = () => {
     setIsMobile(window.innerWidth < 600);
@@ -26,7 +27,6 @@ export const ChatProvider = ({ children }) => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
         const uid = user.uid;
-
         const userDocRef = doc(db, "users", uid);
         const userDoc = await getDoc(userDocRef);
 
@@ -36,10 +36,15 @@ export const ChatProvider = ({ children }) => {
       } else {
         setCurrentUser(null);
       }
+      setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
+
+  if (loading) {
+    return <p>Ładowanie...</p>;
+  }
 
   return (
     <ChatContext.Provider
