@@ -11,6 +11,17 @@
   display: none;
 }
 
+.containerNoChat {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 12;
+}
+
+.containerNoChatMessage {
+  font-size: 1.2rem;
+}
+
 .message {
   max-width: 25rem;
   background-color: #5f5f5f;
