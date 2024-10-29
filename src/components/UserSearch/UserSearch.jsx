@@ -7,25 +7,33 @@ import "react-toastify/dist/ReactToastify.css";
 import ChatItem from "../ChatItem/ChatItem";
 
 const UserSearch = () => {
-  const [username, setUsername] = useState("");
-  const [user, setUser] = useState(null);
+  const [usernameToSearch, setUsernameToSearch] = useState("");
+  const [searchedUser, setSearchedUser] = useState(null);
 
   const handleSetUsername = (e) => {
-    setUsername(e.target.value);
+    setUsernameToSearch(e.target.value);
   };
 
   const handleSearch = async () => {
-    const q = query(collection(db, "users"), where("username", "==", username));
+    const q = query(
+      collection(db, "users"),
+      where("username", "==", usernameToSearch)
+    );
 
     try {
       const querySnapshot = await getDocs(q);
 
       querySnapshot.forEach((doc) => {
-        setUser(doc.data());
+        setSearchedUser(doc.data());
       });
     } catch {
       toast.error("Nie udało się wyszukać użytkownika");
     }
+  };
+
+  const onPickChatPartner = () => {
+    setUsernameToSearch("");
+    setSearchedUser(null);
   };
 
   return (
@@ -41,12 +49,14 @@ const UserSearch = () => {
           id="user"
           className={styles.userInput}
           placeholder="Szukaj użytkownika"
-          value={username}
+          value={usernameToSearch}
           onChange={handleSetUsername}
           onKeyDown={handleSearch}
         />
       </div>
-      {user && <ChatItem user={user} />}
+      {searchedUser && (
+        <ChatItem user={searchedUser} pick={onPickChatPartner} />
+      )}
       <ToastContainer />
     </>
   );

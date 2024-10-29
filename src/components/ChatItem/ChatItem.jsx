@@ -2,11 +2,12 @@ import React, { useContext } from "react";
 import styles from "./ChatItem.module.css";
 import { ChatContext } from "../../ChatContext";
 
-const ChatItem = ({ user, lastMessage }) => {
+const ChatItem = ({ user, lastMessage, pick }) => {
   const { setChatPartner } = useContext(ChatContext);
 
   const handleClick = () => {
     setChatPartner(user.uid);
+    pick();
   };
 
   return (
