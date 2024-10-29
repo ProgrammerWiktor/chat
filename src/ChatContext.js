@@ -42,13 +42,34 @@ export const ChatProvider = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
+  const getUsernameById = async (userId) => {
+    try {
+      const userDocRef = doc(db, "users", userId);
+      const userDoc = await getDoc(userDocRef);
+
+      if (userDoc.exists()) {
+        return userDoc.data().username;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      return null;
+    }
+  };
+
   if (loading) {
     return <p>Ładowanie...</p>;
   }
 
   return (
     <ChatContext.Provider
-      value={{ isMobile, chatPartner, setChatPartner, currentUser }}
+      value={{
+        isMobile,
+        chatPartner,
+        setChatPartner,
+        currentUser,
+        getUsernameById,
+      }}
     >
       {children}
     </ChatContext.Provider>
