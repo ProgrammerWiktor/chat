@@ -98,6 +98,7 @@ const Register = () => {
         username: username,
         email: user.email,
         photoURL: photoURL,
+        chatIds: [],
       });
 
       setUsername("");
